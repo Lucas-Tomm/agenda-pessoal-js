@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Minha Agenda</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Agenda pessoal</p>
+        <h1>Minha Agenda</h1>
+        <p class="subtitle" id="current-date"></p>
+      </div>
+
+      <div class="topbar-actions">
+        <button class="icon-button" id="theme-toggle" type="button" aria-label="Alternar tema"></button>
+        <button class="primary-button" id="new-task-button" type="button">
+          + Nova tarefa
+        </button>
+      </div>
+    </header>
+
+    <section class="toolbar-card" aria-label="Controles da agenda">
+      <div class="filters" role="tablist" aria-label="Filtros de tarefas">
+        <button class="filter-button active" type="button" data-filter="all">Todas</button>
+        <button class="filter-button" type="button" data-filter="today">Hoje</button>
+        <button class="filter-button" type="button" data-filter="pending">Pendentes</button>
+        <button class="filter-button" type="button" data-filter="done">Concluídas</button>
+      </div>
+
+      <label class="search-field" for="search-input">
+        <span class="search-label">Busca por título</span>
+        <input id="search-input" type="search" placeholder="Digite para buscar..." autocomplete="off" />
+      </label>
+    </section>
+
+    <section class="stats-grid" aria-label="Resumo das tarefas">
+      <article class="stat-card pending">
+        <span class="stat-label">Pendentes</span>
+        <strong id="pending-count">0</strong>
+      </article>
+      <article class="stat-card done">
+        <span class="stat-label">Concluídas</span>
+        <strong id="done-count">0</strong>
+      </article>
+    </section>
+
+    <section class="tasks-card">
+      <div class="section-header">
+        <div>
+          <p class="section-kicker">Lista de tarefas</p>
+          <h2 id="task-list-title">Todas as tarefas</h2>
+        </div>
+        <p class="section-note" id="task-summary">0 tarefas encontradas</p>
+      </div>
+
+      <div id="task-list" class="task-list" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <dialog class="task-dialog" id="task-dialog">
+    <form class="task-form" id="task-form" method="dialog">
+      <div class="dialog-header">
+        <div>
+          <p class="section-kicker" id="form-kicker">Nova tarefa</p>
+          <h2 id="form-title">Criar tarefa</h2>
+        </div>
+        <button class="icon-button subtle" id="close-dialog-button" type="button" aria-label="Fechar formulário">×</button>
+      </div>
+
+      <input type="hidden" id="task-id" />
+
+      <div class="form-grid">
+        <label class="field full">
+          <span>Título</span>
+          <input id="task-title" name="title" type="text" maxlength="80" required />
+        </label>
+
+        <label class="field full">
+          <span>Descrição opcional</span>
+          <textarea id="task-description" name="description" rows="4" maxlength="240"></textarea>
+        </label>
+
+        <label class="field">
+          <span>Data</span>
+          <input id="task-date" name="date" type="date" required />
+        </label>
+
+        <label class="field">
+          <span>Horário</span>
+          <input id="task-time" name="time" type="time" required />
+        </label>
+
+        <label class="field">
+          <span>Categoria</span>
+          <select id="task-category" name="category" required>
+            <option>Trabalho</option>
+            <option>Estudo</option>
+            <option>Pessoal</option>
+            <option>Treino</option>
+            <option>Outros</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span>Prioridade</span>
+          <select id="task-priority" name="priority" required>
+            <option>Baixa</option>
+            <option selected>Média</option>
+            <option>Alta</option>
+          </select>
+        </label>
+
+        <label class="field checkbox-field full">
+          <input id="task-completed" name="completed" type="checkbox" />
+          <span>Marcar como concluída</span>
+        </label>
+      </div>
+
+      <div class="form-actions">
+        <button class="secondary-button" id="cancel-task-button" type="button">Cancelar</button>
+        <button class="primary-button" type="submit" id="save-task-button">Salvar tarefa</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="script.js"></script>
+</body>
+</html>
